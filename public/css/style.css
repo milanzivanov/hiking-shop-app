@@ -1,0 +1,424 @@
+@import url('https://fonts.googleapis.com/css2?family=Coda+Caption:wght@800&family=Open+Sans:wght@300;400&display=swap');
+:root {
+    --headings: 'Coda Caption', sans-serif;
+    --bodyFont: 'Open Sans', sans-serif;
+    --fontSize: 16px;
+    --transition: .3s ease;
+    --lightgray: #f6f6f6;
+    --white: #fff;
+    --black: #1e1e1e;
+    --primary: #3a8bcd;
+    --gray: #6c757d;
+    --text: #4a4a4a;
+    --borders: #eeeeee;
+}
+/*********************
+basic styles
+*********************/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: var(--bodyFont);
+    font-size: var(--fontSize);
+    color: var(--text);
+    line-height: 1.6;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-family: var(--headings);
+    color: var(--black);
+}
+a {
+    text-decoration: none;
+    color: var(--primary);
+}
+a:hover {
+    transition: var(--transition);
+}
+ul {
+    list-style: none;
+}
+.container {
+    width: 70%;
+    margin: auto;
+    padding: 100px 0;
+}
+.container::after {
+    display: block;
+    content: "";
+    clear: both;
+}
+.active {
+    color: var(--primary);
+}
+button {
+    padding: 15px 40px;
+    margin-top: 25px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    border-radius: 5px;
+    cursor: pointer;
+}
+h2 {
+    font-size: 1.5rem;
+}
+h2::before {
+    display: block;
+    content: "";
+    width: 40px;
+    height: 3px;
+    background: var(--primary);
+    margin-bottom: 10px;
+}
+/*********************
+topbar
+*********************/
+.topbar {
+    text-align: center;
+    border-bottom: 1px solid var(--lightgray);
+    padding: 20px 0;
+    border-top: 5px solid var(--primary);
+}
+.topbar a {
+    font-size: 2rem;
+    text-shadow: 0 0 1px var(--text);
+}
+.topbar a:hover {
+    color: var(--text);
+}
+.topbar a i {
+    color: var(--text);
+    margin-right: 10px;
+    font-size: 2.5rem;
+}
+/*********************
+nav
+*********************/
+nav {
+    padding: 15px 0;
+    text-align: center;
+}
+nav ul li {
+    display: inline-block;
+    margin: 0 30px;
+}
+nav ul li a {
+    color: var(--black);
+    text-transform: uppercase;
+}
+nav ul li a:hover {
+    color: var(--primary);
+}
+/*********************
+header
+*********************/
+header {
+    background-image: url(../img/header.jpg);
+    padding: 200px 0;
+    background-position: center top;
+    background-size: cover;
+}
+header article {
+    width: 30%;
+    margin-left: 15%;
+    padding: 40px;
+    background: rgba(255,255,255,.7);
+}
+header h1::after {
+    display: block;
+    content: "";
+    width: 40px;
+    background: var(--primary);
+    height: 3px;
+    margin: 20px 0;
+}
+header button {
+    background: var(--primary);
+    border: none;
+    cursor: pointer;
+    color: var(--white);
+}
+header button:hover {
+    background: var(--black);
+}
+/*********************
+featuredItems
+*********************/
+.featuredItems h2 {
+    margin-bottom: 30px;
+}
+.owl-carousel .item {
+    border: 1px solid var(--borders);
+    padding: 30px;
+    border-radius: 5px;
+    transition: var(--transition);
+}
+.owl-carousel .item:hover {
+    border: 1px solid var(--primary);
+}
+/*********************
+subscribe
+*********************/
+.subscribe {
+    text-align: center;
+    background: var(--primary);
+    color: var(--white);
+}
+.subscribe h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+.subscribe p {
+    margin-bottom: 20px;
+}
+.subscribe input {
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.subscribe input[type="text"] {
+    background: transparent;
+    border: 1px solid var(--white);
+    color: var(--white);
+}
+.subscribe input[type="submit"] {
+    background: var(--white);
+    border: 1px solid var(--white);
+}
+.subscribe input[type="submit"]:hover {
+    background: var(--black);
+    color: var(--white);
+    border: 1px solid var(--black);
+}
+/*********************
+footer
+*********************/
+footer {
+    text-align: center;
+}
+footer h3 a {
+    font-size: 1.7rem;
+    text-shadow: 0 0 1px var(--text);
+}
+footer h3 a:hover {
+    color: var(--text);
+}
+footer a i {
+    color: var(--text);
+    margin-right: 10px;
+    font-size: 2.2rem;
+}
+footer nav a {
+    font-size: .8rem;
+}
+footer .icons a i {
+    font-size: 1.5rem;
+    transition: var(--transition);
+}
+footer .icons a i:hover {
+    color: var(--primary);
+}
+footer article:last-child {
+    border-top: 1px solid var(--lightgray);
+    padding: 15px 0;
+}
+/*********************
+products
+*********************/
+.products .item img {
+    width: 100%;
+}
+.products .item {
+    width: 20%;
+    float: left;
+    margin: 30px;
+    border: 1px solid var(--borders);
+    padding: 30px;
+    border-radius: 5px;
+    transition: var(--transition);
+    cursor: pointer;
+}
+.products .item:hover {
+    border: 1px solid var(--primary);
+}
+/*********************
+about
+*********************/
+.about h2 {
+    margin-bottom: 20px;
+}
+.about div:nth-child(1) {
+    width: 40%;
+    float: left;
+}
+.about div:nth-child(2) {
+    width: 60%;
+    float: right;
+    padding: 0 30px;
+}
+.about img {
+    width: 100%;
+}
+.about hr,
+.contact hr,
+.single hr {
+    margin: 20px 0;
+    border: none;
+    background: lightgray;
+    height: 1px;
+}
+.about span,
+.contact span,
+.single span {
+    margin-left: 10px;
+}
+.about span a:hover,
+.contact span a:hover,
+.single span a:hover {
+    color: var(--text);
+}
+/*********************
+contact
+*********************/
+.contact article div:first-child {
+    float: left;
+    width: 48%;
+}
+.contact article div:last-child {
+    float: right;
+    width: 48%;
+}
+.contact h2 {
+    margin-bottom: 20px;
+}
+.contact input,
+.contact textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 15px;
+}
+.contact button,
+.single button {
+    background: var(--primary);
+    color: var(--white);
+    border: none;
+}
+.contact button:hover,
+.single button:hover {
+    background: var(--black);
+}
+/*********************
+single
+*********************/
+.single h2 {
+    margin-bottom: 20px;
+}
+.single article div:first-child {
+    float: left;
+    width: 40%;
+}
+.single article div:last-child {
+    float: right;
+    width: 55%;
+}
+.single h3 {
+    font-size: 1.7rem;
+}
+.single img {
+    width: 100%;
+    border: 1px solid var(--primary);
+    border-radius: 10px;
+}
+.single .price {
+    color: var(--primary);
+    font-size: 1.2rem;
+}
+.single p {
+    font-weight: 300;
+    padding: 10px 0;
+}
+.single select {
+    padding: 15px;
+    border: 1px solid var(--primary);
+    border-radius: 5px;
+    margin: 0 10px;
+}
+/*********************
+RESPONSIVE
+*********************/
+@media(min-width: 768px) and (max-width: 1040px) {
+    header article {
+        width: 90%;
+        margin: auto;
+        padding: 20px;
+    }
+    .products .item {
+        width: 40%;
+        margin: 20px;
+    }
+    .about div:nth-child(1) {
+        width: 100%;
+    }
+    .about div:nth-child(2) {
+        width: 100%;
+    }
+    .contact article div:first-child {
+        width: 100%;
+    }
+    .contact article div:last-child {
+        width: 100%;
+    }
+    .single article div:first-child {
+        width: 100%;
+    }
+    .single article div:last-child {
+        width: 100%;
+    }
+}
+@media(max-width: 767px) {
+    .container {
+        width: 95%;
+        padding: 50px 0;
+    }
+    nav ul li {
+        margin: 0 5px;
+    }
+    nav ul li a {
+        font-size: .9rem;
+    }
+    header article {
+        width: 90%;
+        margin: auto;
+        padding: 20px;
+    }
+    header {
+        padding: 80px 0;
+        background-position: center right;
+    }
+    .products .item {
+        width: 90%;
+        float: none;
+        margin: 20px auto;
+    }
+    .about div:nth-child(1) {
+        width: 100%;
+    }
+    .about div:nth-child(2) {
+        width: 100%;
+    }
+    .contact article div:first-child {
+        width: 100%;
+    }
+    .contact article div:last-child {
+        width: 100%;
+    }
+    .single article div:first-child {
+        width: 100%;
+    }
+    .single article div:last-child {
+        width: 100%;
+    }
+}
+
