@@ -12,6 +12,8 @@ function Single() {
   const { products } = useContext(ProductsContext);
   const { cart, setCart } = useContext(CartContext);
 
+  console.log(cart);
+
   // selecting single product
   let product = products.filter((p) => {
     if (p.id === +params.id) {
@@ -32,7 +34,7 @@ function Single() {
 
   // creating category for viewing
   let categoryElement = [];
-  console.log(product.category);
+  // console.log(product.category);
   let categoryTemporery = product.category.split(","); // this is array
   console.log(categoryTemporery);
 
@@ -56,7 +58,61 @@ function Single() {
   //
   const addToCart = (event) => {
     event.preventDefault();
+
+    // Find existing product in cart (if any)
+    // const existingItem = cart.find((item) => item.id === params.id);
+    const existingItem = cart.some((item) => item.id === params.id);
+    console.log(existingItem);
+
+    // Update quantity or add new item to cart
+    if (existingItem) {
+      existingItem.qty += Number(event.target.selectQty.value);
+    } else {
+      setCart((currentCart) => [
+        ...currentCart,
+        {
+          id: params.id,
+          name: product.name,
+          price: product.price,
+          img: product.img,
+          qty: Number(event.target.selectQty.value)
+        }
+      ]);
+    }
+
+    // Navigate to products page (optional)
+    navigate("/products");
   };
+
+  // const addToCart = (event) => {
+  //   event.preventDefault();
+
+  //   let itemResponse = cart.some((item) => item.id === params.id);
+  //   console.log(itemResponse);
+
+  //   let filteredItem = (cart.filter((item) => {
+  //     if (item.id === params.id) {
+  //       return item; // it returns one product (from one array of one element)
+  //     }
+  //   })[0].qty += Number(event.target.selectQty.value));
+
+  //   const order = setCart((cart) => [
+  //     ...cart,
+  //     {
+  //       id: params.id,
+  //       name: product.name,
+  //       price: product.price,
+  //       img: product.img,
+  //       qty: Number(event.target.selectQty.value)
+  //     }
+  //   ]);
+
+  //   {
+  //     itemResponse ? filteredItem : order;
+  //   }
+
+  //   navigate("/products");
+  // };
 
   return (
     <section className="single container">

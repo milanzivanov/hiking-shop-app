@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 import { Routes, Route } from "react-router-dom";
 
-// import * as $ from "jquery";
+import * as $ from "jquery";
 
 // components
 import Topbar from "./components/Topbar.jsx";
@@ -26,7 +27,7 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route index element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="/single/:id" element={<Single />} />
         <Route path="/about" element={<About />} />
