@@ -36,7 +36,7 @@ function Cart() {
               <th scope="col">Remove</th>
             </tr>
           </thead>
-          <tbody id="cartTable">
+          <tbody>
             {cart.map((item, index) => {
               return (
                 <tr key={item.id}>
