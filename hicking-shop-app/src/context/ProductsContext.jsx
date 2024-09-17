@@ -8,9 +8,18 @@ export const ProductsProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const response = await fetch("http://localhost:3000/");
-      const data = await response.json();
-      setProducts(data);
+      try {
+        const response = await fetch("http://localhost:3000/");
+
+        if (!response.ok) {
+          throw new Error(`Failed to delete product: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.log(error.message);
+      }
     };
     fetchProducts();
   }, []);
