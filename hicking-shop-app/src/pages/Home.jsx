@@ -34,7 +34,10 @@ function Home() {
             necessitatibus rem laudantium!
           </p>
 
-          <form className="row justify-content-center align-items-center mx-auto">
+          <form
+            readOnly
+            className="row justify-content-center align-items-center mx-auto"
+          >
             <div className="col-md-7 d-flex align-items-center">
               <input
                 type="text"

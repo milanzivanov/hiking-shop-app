@@ -39,23 +39,23 @@ function Cart() {
           <tbody>
             {cart.map((item, index) => {
               return (
-                <tr key={item.id}>
+                <tr key={item.id} className="align-middle">
                   <th scope="row">{item.id}</th>
                   <td>
                     <img
                       // src="http://localhost:3000/img/boots.jpg"
                       src={item.img}
-                      alt=""
-                      height="30px"
+                      alt={item.name}
+                      height="50px"
                     />
                   </td>
                   <td>{item.name}</td>
-                  <td>${item.price}</td>
+                  <td>{item.price} RSD</td>
                   <td>{item.qty}</td>
-                  <td>${item.price * item.qty}</td>
+                  <td>{item.price * item.qty},00 RSD</td>
                   <td>
                     <button
-                      className="btn btn-danger"
+                      className="btn btn-danger m-0"
                       onClick={() => removeProduct(index)}
                     >
                       remove
@@ -65,15 +65,22 @@ function Cart() {
               );
             })}
 
-            <tr>
+            <tr className="align-middle">
               <td></td>
               <td></td>
               <td></td>
               <td></td>
-              <td>total</td>
-              <td>${totalPrice}</td>
               <td>
-                <button className="btn btn-danger" onClick={() => setCart([])}>
+                <strong>total</strong>
+              </td>
+              <td>
+                <strong>{totalPrice},00 RSD</strong>{" "}
+              </td>
+              <td>
+                <button
+                  className="btn btn-danger m-0"
+                  onClick={() => setCart([])}
+                >
                   Clear Cart
                 </button>
               </td>

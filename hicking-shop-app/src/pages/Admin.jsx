@@ -2,6 +2,8 @@
 import { useContext, useState } from "react";
 import ProductsContext from "../context/ProductsContext";
 import { useNavigate } from "react-router-dom";
+import AddProduct from "../components/AddProduct";
+import EditProduct from "../components/EditProduct";
 
 function Admin() {
   const navigate = useNavigate();
@@ -123,11 +125,11 @@ function Admin() {
   }
 
   const handleFileChange = async (event) => {
-    const file = event.target.files[0]; // Get the selected file
+    const file = event.target.files[0];
     if (file) {
       try {
-        const base64 = await fileToBase64(file); // Convert file to Base64
-        setBase64String(base64); // Set the Base64 string in state
+        const base64 = await fileToBase64(file);
+        setBase64String(base64);
         setImg(file.name);
       } catch (error) {
         console.error("Error converting file to Base64", error);
@@ -173,129 +175,38 @@ function Admin() {
   return (
     <div className="container">
       {editMode.mode ? (
-        <>
-          <h3 id="naslovForme">Edit Product</h3>
-
-          <form onSubmit={saveEditedProduct}>
-            <div className="mb-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Name"
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-              />
-            </div>
-            <div className="mb-3">
-              <input
-                type="number"
-                className="form-control"
-                placeholder="Price"
-                value={price}
-                onChange={(event) => setPrice(event.target.value)}
-              />
-            </div>
-            <div className="mb-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Description"
-                value={desc}
-                onChange={(event) => setDesc(event.target.value)}
-              />
-            </div>
-            <div className="mb-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Category"
-                value={category}
-                onChange={(event) => setCategory(event.target.value)}
-              />
-            </div>
-            <div className="mb-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Qty"
-                value={qty}
-                onChange={(event) => setQty(event.target.value)}
-              />
-            </div>
-            <button type="submit" className="btn btn-primary">
-              Save product
-            </button>
-          </form>
-          <button className="btn btn-danger" onClick={cancelEditing}>
-            Cancel
-          </button>
-        </>
+        <EditProduct
+          editMode={editMode}
+          saveEditedProduct={saveEditedProduct}
+          cancelEditing={cancelEditing}
+          name={name}
+          setName={setName}
+          price={price}
+          setPrice={setPrice}
+          desc={desc}
+          setDesc={setDesc}
+          category={category}
+          setCategory={setCategory}
+          qty={qty}
+          setQty={setQty}
+        />
       ) : (
-        <>
-          <h3 id="naslovForme">Add new product</h3>
-          <form>
-            <div className="mb-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Name"
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-              />
-            </div>
-            <div className="mb-3">
-              <input
-                type="number"
-                className="form-control"
-                placeholder="Price"
-                value={price}
-                onChange={(event) => setPrice(event.target.value)}
-              />
-            </div>
-            <div className="mb-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Description"
-                value={desc}
-                onChange={(event) => setDesc(event.target.value)}
-              />
-            </div>
-            <div className="mb-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Category"
-                value={category}
-                onChange={(event) => setCategory(event.target.value)}
-              />
-            </div>
-            <div className="mb-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Qty"
-                value={qty}
-                onChange={(event) => setQty(event.target.value)}
-              />
-            </div>
-            <div className="mb-3">
-              <input
-                type="file"
-                className="form-control"
-                name="file"
-                onChange={handleFileChange}
-              />
-            </div>
-            <button
-              onClick={addProduct}
-              type="button"
-              className="btn btn-primary"
-            >
-              Add item
-            </button>
-          </form>
-        </>
+        <AddProduct
+          addProduct={addProduct}
+          name={name}
+          setName={setName}
+          price={price}
+          setPrice={setPrice}
+          desc={desc}
+          setDesc={setDesc}
+          category={category}
+          setCategory={setCategory}
+          qty={qty}
+          setQty={setQty}
+          img={img}
+          setImg={setImg}
+          handleFileChange={handleFileChange}
+        />
       )}
 
       <hr />
@@ -315,17 +226,17 @@ function Admin() {
         <tbody>
           {products.map((product) => {
             return (
-              <tr key={product.id}>
+              <tr key={product.id} className="align-middle">
                 <th scope="row">{product.id}</th>
                 <td>
-                  <img src={product.img} alt="" height="30px" />
+                  <img src={product.img} alt="" height="50px" />
                 </td>
                 <td>{product.name}</td>
                 <td>{product.qty}</td>
                 <td>{product.price} RSD</td>
                 <td>
                   <button
-                    className="btn btn-info"
+                    className="btn btn-info m-0"
                     onClick={() => navigate(`/single/${product.id}`)}
                   >
                     View
@@ -333,7 +244,7 @@ function Admin() {
                 </td>
                 <td>
                   <button
-                    className="btn btn-warning"
+                    className="btn btn-warning m-0"
                     onClick={() => handleEditProduct(product.id)}
                   >
                     Edit
@@ -341,7 +252,7 @@ function Admin() {
                 </td>
                 <td>
                   <button
-                    className="btn btn-danger"
+                    className="btn btn-danger m-0"
                     onClick={() => removeProduct(product.id)}
                   >
                     Delete
