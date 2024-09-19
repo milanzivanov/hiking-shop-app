@@ -7,16 +7,14 @@ import { useNavigate, useParams } from "react-router-dom";
 function Single() {
   const params = useParams();
   const navigate = useNavigate();
-  console.log(params);
+  // console.log(params);
 
   const { products } = useContext(ProductsContext);
   const { cart, setCart } = useContext(CartContext);
 
-  console.log(cart);
-
   // selecting single product
   let product = products.filter((p) => {
-    if (p.id === +params.id) {
+    if (p.id === Number(params.id)) {
       return p;
     }
   })[0];
@@ -36,22 +34,21 @@ function Single() {
   let categoryElement = [];
   // console.log(product.category);
   let categoryTemporery = product.category.split(","); // this is array
-  console.log(categoryTemporery);
+  console.log(categoryTemporery.length);
 
   categoryTemporery.forEach((element, index) => {
     if (categoryTemporery.length !== index + 1) {
       categoryElement.push(
         <a key={index} href="#">
-          {element.trim(
-            <a key={index} href="#">
-              {element.trim()}
-            </a>
-          )}
-          ,
+          {element.trim()},
         </a>
       );
     } else {
-      categoryElement.push();
+      categoryElement.push(
+        <a key={index} href="#">
+          {element.trim()}
+        </a>
+      );
     }
   });
 
@@ -75,6 +72,7 @@ function Single() {
           name: product.name,
           price: product.price,
           img: product.img,
+          category: product.category,
           qty: Number(event.target.selectQty.value)
         }
       ]);
@@ -83,36 +81,6 @@ function Single() {
     // Navigate to products page (optional)
     navigate("/products");
   };
-
-  // const addToCart = (event) => {
-  //   event.preventDefault();
-
-  //   let itemResponse = cart.some((item) => item.id === params.id);
-  //   console.log(itemResponse);
-
-  //   let filteredItem = (cart.filter((item) => {
-  //     if (item.id === params.id) {
-  //       return item; // it returns one product (from one array of one element)
-  //     }
-  //   })[0].qty += Number(event.target.selectQty.value));
-
-  //   const order = setCart((cart) => [
-  //     ...cart,
-  //     {
-  //       id: params.id,
-  //       name: product.name,
-  //       price: product.price,
-  //       img: product.img,
-  //       qty: Number(event.target.selectQty.value)
-  //     }
-  //   ]);
-
-  //   {
-  //     itemResponse ? filteredItem : order;
-  //   }
-
-  //   navigate("/products");
-  // };
 
   return (
     <section className="single container">
@@ -133,10 +101,7 @@ function Single() {
             <button>Order now</button>
           </form>
           <hr />
-          <p>
-            Category: {categoryElement}
-            <a href="">Men</a>, <a href="">Boots</a>
-          </p>
+          <p>Category: {categoryElement}</p>
           <hr />
           <span>Share: </span>
           <span>

@@ -11,12 +11,13 @@ export const ProductsProvider = ({ children }) => {
       try {
         const response = await fetch("http://localhost:3000/");
 
-        if (!response.ok) {
-          throw new Error(`Failed to delete product: ${response.status}`);
-        }
-
         const data = await response.json();
-        setProducts(data);
+        setProducts(
+          data.map((product) => ({
+            ...product,
+            img: `http://localhost:3000/${product.img}`
+          }))
+        );
       } catch (error) {
         console.log(error.message);
       }

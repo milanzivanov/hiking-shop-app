@@ -1,6 +1,14 @@
+import { useContext } from "react";
+import ProductsContext from "../context/ProductsContext";
+import { Link } from "react-router-dom";
+
 import OwlCarousel from "react-owl-carousel";
 
 const Features = () => {
+  const { products } = useContext(ProductsContext);
+
+  if (!products.length) return null;
+
   const options = {
     responsive: {
       0: {
@@ -34,51 +42,34 @@ const Features = () => {
       autoplay
       {...options}
     >
-      {/* 1 */}
-      <div className="review item">
-        <div className="review-img">
-          <a href="single.html">
-            <h3>Boots</h3>
-            <p>$210.00</p>
-            <img src="../../public/img/boots.jpg" alt="boots" />
-          </a>
-        </div>
-      </div>
-
-      {/* 2 */}
-      <div className="review item">
-        <div className="review-img">
-          <a href="single.html">
-            <h3>Jacket</h3>
-            <p>$210.00</p>
-            <img src="../../public/img/jackets.jpg" alt="jacket" />
-          </a>
-        </div>
-      </div>
-
-      {/* 3 */}
-      <div className="review item">
-        <div className="review-img">
-          <a href="single.html">
-            <h3>Pants</h3>
-            <p>$100.00</p>
-            <img src="../../public/img/pants.jpg" alt="hiking pants" />
-          </a>
-        </div>
-      </div>
-
-      {/* 4 */}
-      <div className="review item">
-        <div className="review-img">
-          <a href="single.html">
-            <h3>Poles</h3>
-            <p>$50.00</p>
-            <img src="../../public/img/poles.jpg" alt="poles" />
-          </a>
-        </div>
-      </div>
+      {products.map((product) => {
+        console.log(product);
+        return (
+          <div className="review item" key={product.id}>
+            <div className="review-img">
+              <Link to={`/single/${product.id}`}>
+                <>
+                  <h3>{product.name}</h3>
+                  <p>${product.price}</p>
+                  <img src={product.img} alt={product.name} />
+                </>
+              </Link>
+            </div>
+          </div>
+        );
+      })}
     </OwlCarousel>
   );
 };
 
 export default Features;
+
+// <div className="review item">
+//   <div className="review-img">
+//     <a href="single.html">
+//       <h3>Jacket</h3>
+//       <p>$210.00</p>
+//       <img src="../../public/img/jackets.jpg" alt="jacket" />
+//     </a>
+//   </div>
+// </div>

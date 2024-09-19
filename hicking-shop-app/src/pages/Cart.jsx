@@ -3,7 +3,7 @@ import CartContext from "../context/CartContext";
 
 function Cart() {
   const { cart, setCart } = useContext(CartContext);
-  console.log(cart);
+  // console.log(cart);
 
   const removeProduct = (index) => {
     let tempCart = [...cart];

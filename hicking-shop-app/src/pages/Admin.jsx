@@ -3,6 +3,8 @@ import { useContext, useState } from "react";
 import ProductsContext from "../context/ProductsContext";
 import { useNavigate } from "react-router-dom";
 
+// import axios from "axios";
+
 function Admin() {
   const navigate = useNavigate();
 
@@ -14,6 +16,8 @@ function Admin() {
   const [category, setCategory] = useState("");
   const [qty, setQty] = useState("");
   const [img, setImg] = useState("");
+
+  const [base64String, setBase64String] = useState("");
 
   // remove product
   async function removeProduct(id) {
@@ -30,6 +34,40 @@ function Admin() {
     }
   }
 
+  // convert file to base64
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      // On successful file read
+      reader.onload = function (event) {
+        const base64String = event.target.result.split(",")[1]; // Extract Base64 part
+        resolve(base64String);
+      };
+
+      // On error during file reading
+      reader.onerror = function (error) {
+        reject(error);
+      };
+
+      // Read file as a data URL
+      reader.readAsDataURL(file);
+    });
+  }
+
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0]; // Get the selected file
+    if (file) {
+      try {
+        const base64 = await fileToBase64(file); // Convert file to Base64
+        setBase64String(base64); // Set the Base64 string in state
+        setImg(file.name);
+      } catch (error) {
+        console.error("Error converting file to Base64", error);
+      }
+    }
+  };
+
   // add product
   async function addProduct() {
     try {
@@ -38,22 +76,31 @@ function Admin() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ name, price, img, desc, category, qty })
+        body: JSON.stringify({
+          name,
+          price,
+          img,
+          base64String,
+          desc,
+          category,
+          qty
+        })
       });
 
       //
       const productResponse = await fetch(`http://localhost:3000/`);
       const productData = await productResponse.json();
       setProducts(productData);
+      console.log(productData);
     } catch (error) {
       console.error("Error adding product:", error);
     }
-    // setName("");
-    // setPrice("");
-    // setCategory("");
-    // setDesc("");
-    // setImg("");
-    // setQty("");
+    setName("");
+    setPrice("");
+    setCategory("");
+    setDesc("");
+    setImg("");
+    setQty("");
   }
 
   return (
@@ -61,9 +108,9 @@ function Admin() {
       <>
         <h3 id="naslovForme">New Product</h3>
         <form
-          encType="multipart/form-data"
-          method="post"
-          action="http://localhost:3000/add"
+        // encType="multipart/form-data"
+        // method="post"
+        // action="http://localhost:3000/add"
         >
           <div className="mb-3">
             <input
@@ -114,9 +161,8 @@ function Admin() {
             <input
               type="file"
               className="form-control"
-              value={img}
-              name="uploaded_file"
-              onChange={(event) => setImg(event.target.files[0])}
+              name="file"
+              onChange={handleFileChange}
             />
           </div>
           <button

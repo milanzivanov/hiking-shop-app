@@ -1,12 +1,8 @@
-// import { useContext } from "react";
-// import ProductsContext from "../context/ProductsContext";
 import { Link } from "react-router-dom";
 
 import Features from "../utiliti/OwlCarousel";
 
 function Home() {
-  // const { products } = useContext(ProductsContext);
-
   return (
     <div>
       <header>
