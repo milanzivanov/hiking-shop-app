@@ -93,7 +93,7 @@ function Single() {
         </div>
         <div>
           <h3>{product.name}</h3>
-          <div className="price">${product.price}</div>
+          <div className="price">{product.price},00 RSD</div>
           <p>{product.desc}</p>
           <form onSubmit={addToCart}>
             <label>Quantity</label>

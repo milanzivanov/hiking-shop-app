@@ -16,7 +16,7 @@ function Products() {
               <Link to={`/single/${product.id}`}>
                 <img src={product.img} alt="" />
                 <h3>{product.name}</h3>
-                <p>${product.price}</p>
+                <p>{product.price} RSD</p>
               </Link>
             </div>
           );

@@ -30,8 +30,8 @@ const Features = () => {
         items: 3
       }
     },
-    nav: true,
-    dots: false
+    nav: false,
+    dots: true
   };
 
   return (

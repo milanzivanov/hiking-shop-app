@@ -6,7 +6,7 @@ function Home() {
   return (
     <div>
       <header>
-        <article>
+        <article className="rounded">
           <h1>Online outdoor shop, buy online outdoor clothing & trekking</h1>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates
@@ -26,16 +26,27 @@ function Home() {
       </section>
 
       <section className="subscribe">
-        <article className="container">
+        <article className="container d-flex flex-column justify-content-center">
           <h3>Subscribe on Hiking shop now!</h3>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. <br />{" "}
             Amet vitae atque harum minima sint accusantium optio, laborum
             necessitatibus rem laudantium!
           </p>
-          <form>
-            <input type="text" placeholder="Your email..." />
-            <input type="submit" value="Subscribe" />
+
+          <form className="row justify-content-center align-items-center mx-auto">
+            <div className="col-md-7 d-flex align-items-center">
+              <input
+                type="text"
+                className="form-control p-2"
+                value="email@example.com"
+              />
+            </div>
+            <div className="col-md-5 d-flex align-items-center">
+              <button type="submit" className="mt-0 p-2 btn btn-primary">
+                Subscribe
+              </button>
+            </div>
           </form>
         </article>
       </section>

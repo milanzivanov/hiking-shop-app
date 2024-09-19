@@ -7,7 +7,7 @@ function About() {
         </article>
         <article className="row">
           <div>
-            <img src="img/about.jpg" alt="" />
+            <img src="img/about.jpg" alt="about image" className="rounded" />
           </div>
           <div>
             <p>
