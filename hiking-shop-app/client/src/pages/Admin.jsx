@@ -139,24 +139,26 @@ function Admin() {
 
   // add product
   async function addProduct() {
+    const data = {
+      name,
+      price,
+      img,
+      base64String,
+      desc,
+      category,
+      qty
+    };
+
     try {
       const response = await fetch("http://localhost:3000/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-          name,
-          price,
-          img,
-          base64String,
-          desc,
-          category,
-          qty
-        })
+        body: JSON.stringify(data)
       });
 
-      //
+      // refresh products
       const productResponse = await fetch(`http://localhost:3000/`);
       const productData = await productResponse.json();
       setProducts(productData);
